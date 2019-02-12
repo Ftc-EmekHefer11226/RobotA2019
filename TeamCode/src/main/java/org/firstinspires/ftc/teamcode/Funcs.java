@@ -7,63 +7,74 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 public class Funcs {
 
-    public Dual rDrive;
-    public Dual lDrive;
+/*    public Dual rDrive;
+    public Dual lDrive; */
     private HardwareMap HM = null;
-    // DC Motors
-    private DcMotor rDrive1 = null;
+     //DC Motors
+/*    private DcMotor rDrive1 = null;
     private DcMotor rDrive2 = null;
     private DcMotor lDrive1 = null;
     private DcMotor lDrive2 = null;
-    private DcMotor collection = null;
-    private DcMotor foldCollection = null;
-    private DcMotor collectionElevator = null;
-    private DcMotor elevator = null;
+    public DcMotor collect = null;
+    public DcMotor foldCollect = null;
+    public DcMotor colElevator = null; */
+    public DcMotor elevator = null;
     // Servos
+
     public Servo climb = null;
     public Servo rArm = null;
     public Servo lArm = null;
     // Final Variables
     private static final double kp = 1;
 
-    public void TeleInit(HardwareMap HM2)
+    public void TeleInit(HardwareMap HM)
     {
-        HM = HM2;
+        this.HM = HM;
         // Motors Init
-        rDrive1 = HM.get(DcMotor.class, "rDrive1");
+/*        rDrive1 = HM.get(DcMotor.class, "rDrive1");
         rDrive2 = HM.get(DcMotor.class, "rDrive2");
         lDrive1 = HM.get(DcMotor.class, "lDrive2");
         lDrive2 = HM.get(DcMotor.class, "lDrive2");
-        collection = HM.get(DcMotor.class, "collection");
-        foldCollection = HM.get(DcMotor.class, "foldCollection");
-        collectionElevator = HM.get(DcMotor.class, "collectionElevator");
+        collect = HM.get(DcMotor.class, "collection");
+        foldCollect = HM.get(DcMotor.class, "foldCollection");
+        colElevator = HM.get(DcMotor.class, "collectionElevator"); */
         elevator = HM.get(DcMotor.class, "elevator");
         // Servos Init
         climb = HM.get(Servo.class, "climb");
         rArm = HM.get(Servo.class, "rArm");
         lArm = HM.get(Servo.class, "lArm");
-        // Set Directions
-        rDrive1.setDirection(DcMotorSimple.Direction.REVERSE);
+        // Motors Set Directions
+/*        rDrive1.setDirection(DcMotorSimple.Direction.REVERSE);
         rDrive2.setDirection(DcMotorSimple.Direction.REVERSE);
         lDrive1.setDirection(DcMotorSimple.Direction.FORWARD);
         lDrive2.setDirection(DcMotorSimple.Direction.FORWARD);
-        /* insert the rest */
-        elevator.setDirection(DcMotorSimple.Direction.FORWARD);
+        collect.setDirection(DcMotorSimple.Direction.FORWARD);
+        foldCollect.setDirection(DcMotorSimple.Direction.FORWARD);
+        colElevator.setDirection(DcMotorSimple.Direction.FORWARD); */
+        elevator.setDirection(DcMotorSimple.Direction.REVERSE);
+        // Servos Set Directions
         climb.setDirection(Servo.Direction.FORWARD);
         rArm.setDirection(Servo.Direction.REVERSE);
         lArm.setDirection(Servo.Direction.FORWARD);
         // Set Modes
-        rDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+/*        rDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        /* insert the rest */
+        collect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        foldCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        colElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER); */
+        elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        // Set Positions
+        rArm.setPosition(0);
+        lArm.setPosition(0);
+        climb.setPosition(0);
         // Dual Config
-        rDrive = new Dual (rDrive1, rDrive2);
-        lDrive = new Dual (lDrive1, lDrive2);
+/*        rDrive = new Dual (rDrive1, rDrive2);
+        lDrive = new Dual (lDrive1, lDrive2); */
     }
 
-    class Dual
+/*    class Dual
     {
         DcMotor motor1;
         DcMotor motor2;
@@ -100,5 +111,5 @@ public class Funcs {
             motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         }
-    }
+    } */
 }
