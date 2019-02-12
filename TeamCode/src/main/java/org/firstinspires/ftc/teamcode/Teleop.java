@@ -29,7 +29,7 @@ public class Teleop extends OpMode
     @Override
     public void loop() {
         // Drive
-/*        if (gamepad1.right_stick_y > 0.2 || gamepad1.right_stick_y < -0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2) {
+        if (gamepad1.right_stick_y > 0.2 || gamepad1.right_stick_y < -0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2) {
             funcs.rDrive.setPower(-gamepad1.right_stick_y);
             funcs.lDrive.setPower(-gamepad1.left_stick_y);
             telemetry.addData("powerl: ", funcs.lDrive.motor1.getPower());
@@ -77,7 +77,7 @@ public class Teleop extends OpMode
          else
          {
              funcs.foldCollect.setPower(0);
-         }*/
+         }
         // Arm
         if(gamepad2.y)
         {
