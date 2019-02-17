@@ -9,25 +9,25 @@ public class Funcs {
 
     // Final Variables
     private static final double kp = 1;
-    /* public Dual rDrive;
+     public Dual rDrive;
      public Dual lDrive;
      public DcMotor collect = null;
      public DcMotor foldCollect = null;
         public DcMotor colElevator = null;
-        public DcMotor elevator = null;*/
+        public DcMotor elevator = null;
     public Servo climb = null;
-      /* public Servo rArm = null;
-       public Servo lArm = null;*/
+       public Servo rArm = null;
+       public Servo lArm = null;
     private HardwareMap HM = null;
     // Servos
     //DC Motors
-    /*private DcMotor rDrive1 = null;
+    private DcMotor rDrive1 = null;
     private DcMotor rDrive2 = null;
     private DcMotor lDrive1 = null;
-    private DcMotor lDrive2 = null;*/
+    private DcMotor lDrive2 = null;
 
     public void TeleInit(HardwareMap HM) {
-        this.HM = HM;/*
+        this.HM = HM;
         // Motors Init
         rDrive1 = HM.get(DcMotor.class, "rDrive1");
         rDrive2 = HM.get(DcMotor.class, "rDrive2");
@@ -36,10 +36,10 @@ public class Funcs {
         //    collect = HM.get(DcMotor.class, "collection");
         foldCollect = HM.get(DcMotor.class, "foldCollection");
         colElevator = HM.get(DcMotor.class, "collectionElevator");
-        elevator = HM.get(DcMotor.class, "elevator");*/
+        elevator = HM.get(DcMotor.class, "elevator");
     //  Servos Init
     climb =HM.get(Servo .class,"climb");
-       /* rArm = HM.get(Servo.class, "rArm");
+        rArm = HM.get(Servo.class, "rArm");
         lArm = HM.get(Servo.class, "lArm");
        //  Motors Set Directions
         rDrive1.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -50,9 +50,9 @@ public class Funcs {
         foldCollect.setDirection(DcMotorSimple.Direction.FORWARD);
        colElevator.setDirection(DcMotorSimple.Direction.FORWARD);
         elevator.setDirection(DcMotorSimple.Direction.REVERSE);
-       //  Servos Set Directions*/
+       //  Servos Set Directions
         climb.setDirection(Servo.Direction.FORWARD);
-       /* rArm.setDirection(Servo.Direction.REVERSE);
+        rArm.setDirection(Servo.Direction.REVERSE);
         lArm.setDirection(Servo.Direction.FORWARD);
         // Set Modes
         rDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -65,10 +65,10 @@ public class Funcs {
         elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         // Set Positions
         rArm.setPosition(0);
-        lArm.setPosition(0);*/
+        lArm.setPosition(0);
     climb.setPosition(0);
     // Dual Config
-       /* rDrive = new Dual(rDrive1, rDrive2);
+        rDrive = new Dual(rDrive1, rDrive2);
         lDrive = new Dual(lDrive1, lDrive2);
     }
 
@@ -104,6 +104,6 @@ public class Funcs {
             Dual.this.setPower(0);
             motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
             motor1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        }*/
+        }
     }
 }
