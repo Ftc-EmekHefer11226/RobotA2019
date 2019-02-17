@@ -71,12 +71,10 @@ public class Teleop extends OpMode {
             funcs.rArm.setPosition(0);
             funcs.lArm.setPosition(0);
         }
-        // Climb in
-        if (gamepad2.b) {
+        // Climb
+        if (gamepad2.x) {
             funcs.climb.setPosition(90);
-        }
-        // Climb out
-        else if (gamepad2.x) {
+        } else if (gamepad2.b) {
             funcs.climb.setPosition(0);
         }
         // Elevator
@@ -87,10 +85,12 @@ public class Teleop extends OpMode {
         } else {
             funcs.elevator.setPower(0);
         }
+
+
     }
 
     @Override
     public void stop() {
-}
+    }
 
 }
