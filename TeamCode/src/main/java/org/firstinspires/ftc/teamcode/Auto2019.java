@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @Autonomous(name = "Auto", group = "Iterative Opmode")
-public class Auto1 extends OpMode {
+public class Auto2019 extends OpMode {
     private Funcs funcs = new Funcs();
 
     @Override
@@ -20,8 +20,8 @@ public class Auto1 extends OpMode {
 
     @Override
     public void start() {
-/*        funcs.rDrive.runToPosition(40);
-        funcs.lDrive.runToPosition(40);*/
+        funcs.rDrive.runToPosition(40);
+        funcs.lDrive.runToPosition(40);
     }
 
     @Override

@@ -33,8 +33,8 @@ public class Funcs {
         rDrive2 = HM.get(DcMotor.class, "rDrive2");
         lDrive1 = HM.get(DcMotor.class, "lDrive2");
         lDrive2 = HM.get(DcMotor.class, "lDrive2");
-        //    collect = HM.get(DcMotor.class, "collection");
-        foldCollect = HM.get(DcMotor.class, "foldCollection");
+           collect = HM.get(DcMotor.class, "collection");
+         foldCollect = HM.get(DcMotor.class, "foldCollection");
         colElevator = HM.get(DcMotor.class, "collectionElevator");
         elevator = HM.get(DcMotor.class, "elevator");
     //  Servos Init
