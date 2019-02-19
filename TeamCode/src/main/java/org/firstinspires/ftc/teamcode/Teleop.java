@@ -67,26 +67,30 @@ public class Teleop extends OpMode {
             funcs.rArm.setPosition(180);
             funcs.lArm.setPosition(180);
         }
-        if (gamepad2.a) {
+        if (gamepad2.x) {
             funcs.rArm.setPosition(0);
             funcs.lArm.setPosition(0);
         }
         // Climb
         if (gamepad2.x) {
+            funcs.elevator.setTargetPosition(20);
+            while (funcs.elevator.isBusy()) {}
             funcs.climb.setPosition(90);
         } else if (gamepad2.b) {
+            funcs.elevator.setTargetPosition(-20);
+            while (funcs.elevator.isBusy()) {}
             funcs.climb.setPosition(0);
         }
         // Elevator
-        if (gamepad2.dpad_up) {
+        if(gamepad2.dpad_up) {
             funcs.elevator.setPower(0.7);
-        } else if (gamepad2.dpad_down) {
+        }
+        else if (gamepad2.dpad_down) {
             funcs.elevator.setPower(-0.7);
-        } else {
+        }
+        else {
             funcs.elevator.setPower(0);
         }
-
-
     }
 
     @Override

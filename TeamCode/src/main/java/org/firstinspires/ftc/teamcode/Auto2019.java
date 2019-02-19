@@ -20,8 +20,24 @@ public class Auto2019 extends OpMode {
 
     @Override
     public void start() {
-        funcs.rDrive.runToPosition(40);
-        funcs.lDrive.runToPosition(40);
+        funcs.elevator.setTargetPosition(-20);
+        while (funcs.elevator.isBusy()) {}
+        funcs.climb.setPosition(0);
+        funcs.rDrive.runToPosition(20);
+        funcs.lDrive.runToPosition(20);
+        funcs.rDrive.runToPosition(15);
+        funcs.lDrive.runToPosition(-15);
+        funcs.rDrive.runToPosition(-40);
+        funcs.lDrive.runToPosition(-40);
+        funcs.rArm.setPosition(180);
+        funcs.lArm.setPosition(180);
+        funcs.rDrive.runToPosition(5);
+        funcs.lDrive.runToPosition(-5);
+        funcs.rArm.setPosition(0);
+        funcs.lArm.setPosition(0);
+        funcs.rDrive.runToPosition(50);
+        funcs.lDrive.runToPosition(50);
+        // Values to Be Changed
     }
 
     @Override

@@ -6,7 +6,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
 public class Funcs {
-
     // Final Variables
     private static final double kp = 1;
      public Dual rDrive;
@@ -37,11 +36,11 @@ public class Funcs {
          foldCollect = HM.get(DcMotor.class, "foldCollection");
         colElevator = HM.get(DcMotor.class, "collectionElevator");
         elevator = HM.get(DcMotor.class, "elevator");
-    //  Servos Init
-    climb =HM.get(Servo .class,"climb");
+        //  Servos Init
+        climb =HM.get(Servo .class,"climb");
         rArm = HM.get(Servo.class, "rArm");
         lArm = HM.get(Servo.class, "lArm");
-       //  Motors Set Directions
+        // Motors Set Directions
         rDrive1.setDirection(DcMotorSimple.Direction.REVERSE);
         rDrive2.setDirection(DcMotorSimple.Direction.REVERSE);
         lDrive1.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -50,7 +49,7 @@ public class Funcs {
         foldCollect.setDirection(DcMotorSimple.Direction.FORWARD);
        colElevator.setDirection(DcMotorSimple.Direction.FORWARD);
         elevator.setDirection(DcMotorSimple.Direction.REVERSE);
-       //  Servos Set Directions
+        // Servos Set Directions
         climb.setDirection(Servo.Direction.FORWARD);
         rArm.setDirection(Servo.Direction.REVERSE);
         lArm.setDirection(Servo.Direction.FORWARD);
@@ -66,8 +65,8 @@ public class Funcs {
         // Set Positions
         rArm.setPosition(0);
         lArm.setPosition(0);
-    climb.setPosition(0);
-    // Dual Config
+        climb.setPosition(90);
+        // Dual Config
         rDrive = new Dual(rDrive1, rDrive2);
         lDrive = new Dual(lDrive1, lDrive2);
     }
