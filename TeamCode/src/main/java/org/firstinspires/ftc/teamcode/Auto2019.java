@@ -21,7 +21,6 @@ public class Auto2019 extends OpMode {
     @Override
     public void start() {
         funcs.elevator.setTargetPosition(-20);
-        while (funcs.elevator.isBusy()) {}
         funcs.climb.setPosition(0);
         funcs.rDrive.runToPosition(20);
         funcs.lDrive.runToPosition(20);

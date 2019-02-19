@@ -74,11 +74,9 @@ public class Teleop extends OpMode {
         // Climb
         if (gamepad2.x) {
             funcs.elevator.setTargetPosition(20);
-            while (funcs.elevator.isBusy()) {}
             funcs.climb.setPosition(90);
         } else if (gamepad2.b) {
             funcs.elevator.setTargetPosition(-20);
-            while (funcs.elevator.isBusy()) {}
             funcs.climb.setPosition(0);
         }
         // Elevator
