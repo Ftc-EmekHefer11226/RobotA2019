@@ -10,6 +10,8 @@ import com.qualcomm.robotcore.util.Range;
 public class Teleop extends OpMode {
     private Funcs funcs = new Funcs();
     private boolean arm_toggle = false;
+    private boolean climb_toggle = false;
+
     @Override
     public void init() {
         telemetry.addData("Status", "Initializing");
@@ -28,6 +30,27 @@ public class Teleop extends OpMode {
     @Override
     public void loop() {
         // Drive
+        drive();
+        // Collect
+//        collect();
+        // Collection Elevator
+        colElevator();
+        // Collection Fold
+//        colFold();
+        // Arm
+        arm();
+        // Climb
+        climb();
+        // Elevator
+        elevator();
+    }
+
+    @Override
+    public void stop() {
+    }
+
+
+    public void drive() {
         if (gamepad1.right_stick_y > 0.2 || gamepad1.right_stick_y < -0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2) {
             funcs.rDrive.setPower(-gamepad1.right_stick_y);
             funcs.lDrive.setPower(-gamepad1.left_stick_y);
@@ -38,63 +61,73 @@ public class Teleop extends OpMode {
             funcs.rDrive.setPower(0);
             funcs.lDrive.setPower(0);
         }
-        // Collect
-      /*  if (gamepad2.right_trigger > 0) {
+
+    }
+
+    public void collect() {
+        if (gamepad2.right_trigger > 0) {
             funcs.collect.setPower(0.7);
         } else if (gamepad2.left_trigger == 0) {
             funcs.collect.setPower(-0.7);
         } else {
             funcs.collect.setPower(0);
-        } */
-        // Collection Elevator
+        }
+    }
+
+    public void colElevator() {
         if (gamepad2.right_stick_y > 0) {
             funcs.colElevator.setPower(0.7);
-        } else if (gamepad2.left_stick_y < 0) {
+        } else if (gamepad2.right_stick_y < 0) {
             funcs.colElevator.setPower(-0.7);
         } else {
             funcs.colElevator.setPower(0);
         }
-        // Collection Fold
-        /* if (gamepad2.right_bumper) {
+    }
+
+    public void colFold() {
+        if (gamepad2.right_bumper) {
             funcs.foldCollect.setPower(0.7);
         } else if (gamepad2.left_bumper) {
             funcs.foldCollect.setPower(-0.7);
         } else {
             funcs.foldCollect.setPower(0);
-        }*/
-        // Arm
-        if (gamepad2.y){
+        }
+    }
+
+    public void arm() {
+        if (gamepad2.y) {
             arm_toggle = !arm_toggle;
         }
         if (arm_toggle) {
             funcs.rArm.setPosition(180);
             funcs.lArm.setPosition(180);
-        }
-        else {
+        } else {
             funcs.rArm.setPosition(0);
             funcs.lArm.setPosition(0);
         }
-        // Climb
+    }
+
+    public void climb() {
         if (gamepad2.x) {
+            climb_toggle = !climb_toggle;
+        }
+        if (climb_toggle) {
             funcs.climb.setPosition(90);
-        } else if (gamepad2.b) {
+        } else {
             funcs.climb.setPosition(0);
         }
-        // Elevator
-        if(gamepad2.dpad_up) {
+    }
+
+    public void elevator() {
+        if (gamepad2.dpad_up) {
             funcs.elevator.setPower(0.9);
-        }
-        else if (gamepad2.dpad_down) {
+        } else if (gamepad2.dpad_down) {
             funcs.elevator.setPower(-0.9);
-        }
-        else {
+        } else {
             funcs.elevator.setPower(0);
         }
         telemetry.addData("elevator", funcs.elevator.getCurrentPosition());
-    }
 
-    @Override
-    public void stop() {
     }
 
 }
