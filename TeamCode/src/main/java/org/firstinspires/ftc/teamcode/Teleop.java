@@ -15,7 +15,7 @@ public class Teleop extends OpMode {
     @Override
     public void init() {
         telemetry.addData("Status", "Initializing");
-        funcs.TeleInit(hardwareMap);
+        funcs.Init(hardwareMap);
         telemetry.addData("Status", "Initialized");
     }
 
@@ -32,11 +32,11 @@ public class Teleop extends OpMode {
         // Drive
         drive();
         // Collect
-//        collect();
+        collect();
         // Collection Elevator
         colElevator();
         // Collection Fold
-//        colFold();
+        colFold();
         // Arm
         arm();
         // Climb
@@ -50,18 +50,19 @@ public class Teleop extends OpMode {
     }
 
     private boolean sensitiveVal = false;
-    public void sensitive() {
+
+    public boolean sensitive() {
         if (gamepad1.x && !sensitiveVal) {
-            sensitiveVal = true;
-        } else if (gamepad1.x = sensitiveVal) {
-            sensitiveVal = false;
+            return true;
         }
+        return false;
+
     }
 
 
     public void drive() {
 
-        if (!sensitiveVal) {
+        if (!sensitive()) {
             if (gamepad1.right_stick_y > 0.2 || gamepad1.right_stick_y < -0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2) {
                 funcs.rDrive.setPower(-gamepad1.right_stick_y);
                 funcs.lDrive.setPower(-gamepad1.left_stick_y);

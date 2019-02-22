@@ -13,7 +13,7 @@ public class Teleop extends OpMode {
     @Override
     public void init() {
         telemetry.addData("Status", "Initializing");
-        funcs.TeleInit(hardwareMap);
+        funcs.Init(hardwareMap);
         telemetry.addData("Status", "Initialized");
     }
 
