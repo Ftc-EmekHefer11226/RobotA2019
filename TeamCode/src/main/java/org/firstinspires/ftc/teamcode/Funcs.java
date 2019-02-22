@@ -15,8 +15,8 @@ public class Funcs {
     private static final double kp = 1;
     public Dual rDrive;
     public Dual lDrive;
-    public DcMotor collect = null;
-    public DcMotor foldCollect = null;
+//    public DcMotor collect = null;
+//    public DcMotor foldCollect = null;
     public DcMotor colElevator = null;
     // Servos
     public DcMotor elevator = null;
@@ -57,8 +57,8 @@ public class Funcs {
         rDrive2.setDirection(DcMotor.Direction.REVERSE);
         lDrive1.setDirection(DcMotor.Direction.FORWARD);
         lDrive2.setDirection(DcMotor.Direction.FORWARD);
-        collect.setDirection(DcMotor.Direction.FORWARD);
-        foldCollect.setDirection(DcMotor.Direction.FORWARD);
+//        collect.setDirection(DcMotor.Direction.FORWARD);
+//        foldCollect.setDirection(DcMotor.Direction.FORWARD);
         colElevator.setDirection(DcMotor.Direction.FORWARD);
         elevator.setDirection(DcMotor.Direction.REVERSE);
         // Servos Set Directions
@@ -70,8 +70,8 @@ public class Funcs {
         rDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        collect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        foldCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        collect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        foldCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         colElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         // Set Positions
@@ -83,8 +83,8 @@ public class Funcs {
         rDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         lDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        collect.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        foldCollect.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+//        collect.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+//        foldCollect.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         colElevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         elevator.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         // Dual Config

@@ -32,11 +32,11 @@ public class Teleop extends OpMode {
         // Drive
         drive();
         // Collect
-        collect();
+//        collect();
         // Collection Elevator
         colElevator();
         // Collection Fold
-        colFold();
+//        colFold();
         // Arm
         arm();
         // Climb
@@ -87,15 +87,15 @@ public class Teleop extends OpMode {
         }
     }
 
-    public void collect() {
-        if (gamepad2.right_trigger > 0.2) {
-            funcs.collect.setPower(gamepad2.right_trigger);
-        } else if (gamepad2.left_trigger > 0.2) {
-            funcs.collect.setPower(-gamepad2.left_trigger);
-        } else {
-            funcs.collect.setPower(0);
-        }
-    }
+//    public void collect() {
+//        if (gamepad2.right_trigger > 0.2) {
+//            funcs.collect.setPower(gamepad2.right_trigger);
+//        } else if (gamepad2.left_trigger > 0.2) {
+//            funcs.collect.setPower(-gamepad2.left_trigger);
+//        } else {
+//            funcs.collect.setPower(0);
+//        }
+//    }
 
     public void colElevator() {
         if (gamepad2.right_stick_y > 0) {
@@ -107,15 +107,15 @@ public class Teleop extends OpMode {
         }
     }
 
-    public void colFold() {
-        if (gamepad2.right_bumper) {
-            funcs.foldCollect.setPower(0.7);
-        } else if (gamepad2.left_bumper) {
-            funcs.foldCollect.setPower(-0.7);
-        } else {
-            funcs.foldCollect.setPower(0);
-        }
-    }
+//    public void colFold() {
+//        if (gamepad2.right_bumper) {
+//            funcs.foldCollect.setPower(0.7);
+//        } else if (gamepad2.left_bumper) {
+//            funcs.foldCollect.setPower(-0.7);
+//        } else {
+//            funcs.foldCollect.setPower(0);
+//        }
+//    }
 
     public void arm() {
         if (gamepad1.y) {
@@ -131,9 +131,9 @@ public class Teleop extends OpMode {
     }
 
     public void climb() {
-        if (gamepad1.right_bumper) {
+        if (gamepad1.left_bumper) {
             funcs.climb.setPosition(0);
-        } else if (gamepad1.left_bumper) {
+        } else if (gamepad1.right_bumper) {
             funcs.climb.setPosition(90);
         }
 
@@ -148,7 +148,18 @@ public class Teleop extends OpMode {
             funcs.elevator.setPower(0);
         }
         telemetry.addData("elevator", funcs.elevator.getCurrentPosition());
+        telemetry.update();
 
     }
-
+//    public void collectDown(){
+//        if (funcs.colElevator.getCurrentPosition() > 1000 && funcs.colElevator.getCurrentPosition() < 1100){
+//            funcs.foldCollect.setPower(1);
+//        }
+//        else if(funcs.colElevator.getCurrentPosition() < 1000 && funcs.colElevator.getCurrentPosition() > 900){
+//            funcs.foldCollect.setPower(-1);
+//        }
+//        else{
+//            funcs.foldCollect.setPower(0);
+//        }
+//    }
 }
