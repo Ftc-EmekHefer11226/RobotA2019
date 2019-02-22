@@ -119,15 +119,14 @@ public class Teleop extends OpMode {
     }
 
     public void elevator() {
-        if (gamepad2.dpad_up && funcs.elevator.getCurrentPosition() < 13000) {
+        if (gamepad2.dpad_up) {
             funcs.elevator.setPower(0.9);
         } else if (gamepad2.dpad_down) {
             funcs.elevator.setPower(-0.9);
         } else {
             funcs.elevator.setPower(0);
         }
-        telemetry.addData("elevator position:", funcs.elevator.getCurrentPosition());
-        telemetry.update();
+        telemetry.addData("elevator", funcs.elevator.getCurrentPosition());
 
     }
 
