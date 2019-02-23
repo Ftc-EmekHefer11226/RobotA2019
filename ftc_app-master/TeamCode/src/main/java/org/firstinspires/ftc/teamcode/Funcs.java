@@ -27,7 +27,7 @@ public class Funcs {
     // Final Variables
     private static final double kp = 1;
 
-    public void TeleInit(HardwareMap HM) {
+    public void Init(HardwareMap HM) {
         this.HM = HM;
         // Motors Init
         rDrive1 = HM.get(DcMotor.class, "rDrive1");

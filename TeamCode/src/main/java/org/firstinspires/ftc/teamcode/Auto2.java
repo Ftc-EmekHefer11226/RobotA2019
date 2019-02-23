@@ -16,7 +16,7 @@ public class Auto2 extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        funcs.TeleInit(hardwareMap);
+        funcs.Init(hardwareMap);
 
         waitForStart();
         funcs.driveForward(10);
