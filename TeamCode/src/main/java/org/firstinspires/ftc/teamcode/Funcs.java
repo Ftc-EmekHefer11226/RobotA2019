@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -58,7 +59,7 @@ public class Funcs {
         collect.setDirection(DcMotor.Direction.FORWARD);
         foldCollect.setDirection(DcMotor.Direction.FORWARD);
         colElevator.setDirection(DcMotor.Direction.FORWARD);
-        elevator.setDirection(DcMotor.Direction.REVERSE);
+        elevator.setDirection(DcMotor.Direction.FORWARD);
         // Servos Set Directions
         climb.setDirection(Servo.Direction.FORWARD);
         rArm.setDirection(Servo.Direction.REVERSE);
@@ -130,8 +131,8 @@ public class Funcs {
         lDrive1.setTargetPosition(encoderTarget);
         rDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         lDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rDrive.setPower(0.7 * encoderTarget / Math.abs(encoderTarget));
-        lDrive.setPower(0.7 * encoderTarget / Math.abs(encoderTarget));
+        rDrive.setPower(-0.7 * encoderTarget / Math.abs(encoderTarget));
+        lDrive.setPower(-0.7 * encoderTarget / Math.abs(encoderTarget));
         while (rDrive1.isBusy() && lDrive1.isBusy()) {
         }
         rDrive.setPower(0);
@@ -151,8 +152,8 @@ public class Funcs {
         lDrive1.setTargetPosition(-encoderTarget);
         rDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         lDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rDrive.setPower(0.7 * encoderTarget / Math.abs(encoderTarget));
-        lDrive.setPower(-0.7 * encoderTarget / Math.abs(encoderTarget));
+        rDrive.setPower(-0.7 * encoderTarget / Math.abs(encoderTarget));
+        lDrive.setPower(0.7 * encoderTarget / Math.abs(encoderTarget));
         while (rDrive1.isBusy() && lDrive1.isBusy()) {
             rDrive.getCurrentPosition();
         }

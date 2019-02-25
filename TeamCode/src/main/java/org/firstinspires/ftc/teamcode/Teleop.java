@@ -88,10 +88,10 @@ public class Teleop extends OpMode {
     }
 
     public void collect() {
-       if (gamepad2.right_trigger > 0.2) {
-            funcs.collect.setPower(gamepad2.right_trigger);
-        } else if (gamepad2.left_trigger > 0.2) {
-           funcs.collect.setPower(-gamepad2.left_trigger);
+       if (gamepad2.left_trigger > 0.2) {
+            funcs.collect.setPower(gamepad2.left_trigger);
+        } else if (gamepad2.right_trigger > 0.2) {
+           funcs.collect.setPower(-gamepad2.right_trigger);
         } else {
             funcs.collect.setPower(0);
         }
@@ -136,9 +136,9 @@ public class Teleop extends OpMode {
 
     public void colFold() {
         if (gamepad2.right_bumper) {
-            funcs.foldCollect.setPower(0.5);
+            funcs.foldCollect.setPower(1);
        } else if (gamepad2.left_bumper) {
-            funcs.foldCollect.setPower(-0.5);
+            funcs.foldCollect.setPower(-1);
         } else {
             funcs.foldCollect.setPower(0);
         }
@@ -146,13 +146,13 @@ public class Teleop extends OpMode {
 
     public void arm() {
         if (gamepad1.dpad_up) {
-            funcs.rArm.setPosition(180);
-            funcs.lArm.setPosition(180);
+            funcs.rArm.setPosition(0);
+            funcs.lArm.setPosition(0);
             telemetry.addData("servo", "up");
         }
         if (gamepad1.dpad_down) {
-            funcs.rArm.setPosition(0);
-            funcs.lArm.setPosition(0);
+            funcs.rArm.setPosition(100);
+            funcs.lArm.setPosition(100);
             telemetry.addData("servo", "down");
         }
     }

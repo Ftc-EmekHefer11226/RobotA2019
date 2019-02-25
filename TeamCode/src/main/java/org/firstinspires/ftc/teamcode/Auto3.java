@@ -27,11 +27,28 @@ public class Auto3 extends OpMode {
 
     @Override
     public void start() {
-        funcs.elevatorUp();
-        funcs.climb.setPosition(90);
-        /* findCube();
+        telemetry.addData("pass:", funcs.elevator.getCurrentPosition());
+        /*funcs.elevatorUp();
+        funcs.climb.setPosition(90);*/
+        telemetry.addData("find cube", ".");
+        //funcs.driveForward(14);
+         findCube();
         findCube();
-        findCube(); */
+        findCube();
+        /*funcs.driveForward(20);
+        funcs.turnDeg(180);
+        // sleep
+        funcs.rArm.setPosition(0);
+        funcs.lArm.setPosition(0);
+        // sleep
+        funcs.rArm.setPosition(100);
+        funcs.lArm.setPosition(100);
+        // sleep
+        funcs.turnDeg(45);
+        // sleep
+        funcs.driveForward(95);*/
+
+
     }
 
     @Override
