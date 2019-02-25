@@ -27,17 +27,21 @@ public class Auto3 extends OpMode {
 
     @Override
     public void start() {
+        funcs.elevatorUp();
+        funcs.climb.setPosition(90);
+        /* findCube();
         findCube();
-        findCube();
-        findCube();
+        findCube(); */
     }
 
     @Override
     public void loop() {
+        /*
         telemetry.addData("Red  ", funcs.colorSensor.red());
         telemetry.addData("Green", funcs.colorSensor.green());
         telemetry.addData("Blue ", funcs.colorSensor.blue());
         telemetry.update();
+        */
     }
 
     @Override
@@ -72,6 +76,16 @@ public class Auto3 extends OpMode {
                 }
                 break;
         }
+            if (funcs.colorSensor()) {
+                telemetry.addData("r:", funcs.colorSensor.red());
+                telemetry.addData("g:", funcs.colorSensor.green());
+                telemetry.addData("b:", funcs.colorSensor.blue());
+            }
+                else {
+                    funcs.rDrive.setPower(0);
+                    funcs.lDrive.setPower(0);
+                }
+        }
     }
 
-}
+

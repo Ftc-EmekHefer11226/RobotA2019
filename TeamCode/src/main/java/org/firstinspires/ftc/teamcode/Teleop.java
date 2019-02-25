@@ -32,11 +32,11 @@ public class Teleop extends OpMode {
         // Drive
         drive();
         // Collect
-//        collect();
+        //collect();
         // Collection Elevator
         colElevator();
         // Collection Fold
-//        colFold();
+        //colFold();
         // Arm
         arm();
         // Climb
@@ -75,8 +75,8 @@ public class Teleop extends OpMode {
             }
         } else {
             if (gamepad1.right_stick_y > 0.2 || gamepad1.right_stick_y < -0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2) {
-                funcs.rDrive.setPower(-gamepad1.right_stick_y / 2);
-                funcs.lDrive.setPower(-gamepad1.left_stick_y / 2);
+                funcs.rDrive.setPower(-gamepad1.right_stick_y * 0.2);
+                funcs.lDrive.setPower(-gamepad1.left_stick_y * 0.2);
                 telemetry.addData("LeftPower: ", funcs.lDrive.motor1.getPower());
                 telemetry.addData("RightPower: ", funcs.rDrive.motor1.getPower());
                 telemetry.update();
@@ -87,46 +87,73 @@ public class Teleop extends OpMode {
         }
     }
 
-//    public void collect() {
-//        if (gamepad2.right_trigger > 0.2) {
-//            funcs.collect.setPower(gamepad2.right_trigger);
-//        } else if (gamepad2.left_trigger > 0.2) {
-//            funcs.collect.setPower(-gamepad2.left_trigger);
-//        } else {
-//            funcs.collect.setPower(0);
-//        }
-//    }
+   /* public void collect() {
+       if (gamepad2.right_trigger > 0.2) {
+            funcs.collect.setPower(gamepad2.right_trigger);
+        } else if (gamepad2.left_trigger > 0.2) {
+           funcs.collect.setPower(-gamepad2.left_trigger);
+        } else {
+            funcs.collect.setPower(0);
+        }
+  }*/
+
+    public void colExtend() {
+        if (gamepad2.y) {
+            if (funcs.colElevator.getCurrentPosition() < 1000) {
+                funcs.colElevator.setPower(0.7);
+            }
+            else if (funcs.colElevator.getCurrentPosition() > 1000) {
+                funcs.colElevator.setPower(0);
+                funcs.foldCollect.setPower(0.7);
+            }
+        }
+        else if (gamepad2.a) {
+            if (funcs.foldCollect.getCurrentPosition() > 1) {
+                funcs.foldCollect.setPower(-0.7);
+            }
+            else if (funcs.foldCollect.getCurrentPosition() < 1) {
+                funcs.foldCollect.setPower(0);
+                funcs.colElevator.setPower(-0.7);
+            }
+        }
+        else {
+            funcs.colElevator.setPower(0);
+            funcs.foldCollect.setPower(0);
+        }
+    }
 
     public void colElevator() {
-        if (gamepad2.right_stick_y > 0) {
+        if (gamepad2.y){
             funcs.colElevator.setPower(0.7);
-        } else if (gamepad2.right_stick_y < 0) {
+        }
+        else if (gamepad2.a){
             funcs.colElevator.setPower(-0.7);
-        } else {
+        }
+        else{
             funcs.colElevator.setPower(0);
         }
     }
 
-//    public void colFold() {
-//        if (gamepad2.right_bumper) {
-//            funcs.foldCollect.setPower(0.7);
-//        } else if (gamepad2.left_bumper) {
-//            funcs.foldCollect.setPower(-0.7);
-//        } else {
-//            funcs.foldCollect.setPower(0);
-//        }
-//    }
+   /* public void colFold() {
+        if (gamepad2.right_bumper) {
+            funcs.foldCollect.setPower(0.7);
+       } else if (gamepad2.left_bumper) {
+            funcs.foldCollect.setPower(-0.7);
+        } else {
+            funcs.foldCollect.setPower(0);
+        }
+    }*/
 
     public void arm() {
-        if (gamepad1.y) {
-            arm_toggle = !arm_toggle;
-        }
-        if (arm_toggle) {
+        if (gamepad1.dpad_up) {
             funcs.rArm.setPosition(180);
             funcs.lArm.setPosition(180);
-        } else {
+            telemetry.addData("servo", "up");
+        }
+        if (gamepad1.dpad_down) {
             funcs.rArm.setPosition(0);
             funcs.lArm.setPosition(0);
+            telemetry.addData("servo", "down");
         }
     }
 
