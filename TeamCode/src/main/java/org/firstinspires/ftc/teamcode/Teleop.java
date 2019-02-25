@@ -32,11 +32,11 @@ public class Teleop extends OpMode {
         // Drive
         drive();
         // Collect
-        //collect();
+        collect();
         // Collection Elevator
         colElevator();
         // Collection Fold
-        //colFold();
+        colFold();
         // Arm
         arm();
         // Climb
@@ -87,7 +87,7 @@ public class Teleop extends OpMode {
         }
     }
 
-   /* public void collect() {
+    public void collect() {
        if (gamepad2.right_trigger > 0.2) {
             funcs.collect.setPower(gamepad2.right_trigger);
         } else if (gamepad2.left_trigger > 0.2) {
@@ -95,7 +95,7 @@ public class Teleop extends OpMode {
         } else {
             funcs.collect.setPower(0);
         }
-  }*/
+  }
 
     public void colExtend() {
         if (gamepad2.y) {
@@ -134,15 +134,15 @@ public class Teleop extends OpMode {
         }
     }
 
-   /* public void colFold() {
+    public void colFold() {
         if (gamepad2.right_bumper) {
-            funcs.foldCollect.setPower(0.7);
+            funcs.foldCollect.setPower(0.5);
        } else if (gamepad2.left_bumper) {
-            funcs.foldCollect.setPower(-0.7);
+            funcs.foldCollect.setPower(-0.5);
         } else {
             funcs.foldCollect.setPower(0);
         }
-    }*/
+    }
 
     public void arm() {
         if (gamepad1.dpad_up) {
@@ -178,15 +178,15 @@ public class Teleop extends OpMode {
         telemetry.update();
 
     }
-//    public void collectDown(){
-//        if (funcs.colElevator.getCurrentPosition() > 1000 && funcs.colElevator.getCurrentPosition() < 1100){
-//            funcs.foldCollect.setPower(1);
-//        }
-//        else if(funcs.colElevator.getCurrentPosition() < 1000 && funcs.colElevator.getCurrentPosition() > 900){
-//            funcs.foldCollect.setPower(-1);
-//        }
-//        else{
-//            funcs.foldCollect.setPower(0);
-//        }
-//    }
+    public void collectDown(){
+        if (funcs.colElevator.getCurrentPosition() > 1000 && funcs.colElevator.getCurrentPosition() < 1100){
+            funcs.foldCollect.setPower(1);
+        }
+        else if(funcs.colElevator.getCurrentPosition() < 1000 && funcs.colElevator.getCurrentPosition() > 900){
+            funcs.foldCollect.setPower(-1);
+        }
+        else{
+            funcs.foldCollect.setPower(0);
+        }
+    }
 }
