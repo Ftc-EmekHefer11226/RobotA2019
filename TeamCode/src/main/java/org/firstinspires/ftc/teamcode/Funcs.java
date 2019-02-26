@@ -34,6 +34,7 @@ public class Funcs {
 
     public void Init(HardwareMap HM) {
         this.HM = HM;
+
         // Motors Init
         rDrive1 = HM.get(DcMotor.class, "rDrive1");
         rDrive2 = HM.get(DcMotor.class, "rDrive2");
@@ -43,10 +44,12 @@ public class Funcs {
         foldCollect = HM.get(DcMotor.class, "foldCollection");
         colElevator = HM.get(DcMotor.class, "collectionElevator");
         elevator = HM.get(DcMotor.class, "elevator");
+
         //  Servos Init
         climb = HM.get(Servo.class, "climb");
         rArm = HM.get(Servo.class, "rArm");
         lArm = HM.get(Servo.class, "lArm");
+
         // Sensors Init
         imu = HM.get(BNO055IMU.class, "imu");
         colorSensor = HM.get(ColorSensor.class, "colorSensor");
@@ -60,21 +63,28 @@ public class Funcs {
         foldCollect.setDirection(DcMotor.Direction.FORWARD);
         colElevator.setDirection(DcMotor.Direction.FORWARD);
         elevator.setDirection(DcMotor.Direction.FORWARD);
+
         // Servos Set Directions
         climb.setDirection(Servo.Direction.FORWARD);
         rArm.setDirection(Servo.Direction.REVERSE);
         lArm.setDirection(Servo.Direction.FORWARD);
+
         // Set Modes
         rDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        collect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        foldCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+         collect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+         foldCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         colElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
         // Set Positions
+        rArm.setPosition(180);
+        lArm.setPosition(180);
         climb.setPosition(0);
+
         // Set Brake
         rDrive1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rDrive2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
@@ -131,8 +141,8 @@ public class Funcs {
         lDrive1.setTargetPosition(encoderTarget);
         rDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         lDrive1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rDrive.setPower(-0.7 * encoderTarget / Math.abs(encoderTarget));
-        lDrive.setPower(-0.7 * encoderTarget / Math.abs(encoderTarget));
+        rDrive.setPower(0.87);
+        lDrive.setPower(1);
         while (rDrive1.isBusy() && lDrive1.isBusy()) {
         }
         rDrive.setPower(0);
@@ -170,6 +180,12 @@ public class Funcs {
         while (elevator.isBusy()) {
         }
         elevator.setPower(0);
+    }
+
+    public void collectDown() {
+        if (foldCollect.getCurrentPosition() < 10) {
+            // foldCollect.setTargetPosition();
+        }
     }
 
     public boolean colorSensor() {

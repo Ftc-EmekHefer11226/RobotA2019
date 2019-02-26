@@ -19,6 +19,10 @@ public class Auto2 extends LinearOpMode {
         funcs.Init(hardwareMap);
 
         waitForStart();
-        funcs.driveForward(10);
+        funcs.driveForward(50);
+        // Drops the Team Marker
+        funcs.driveForward(5);
+        funcs.turnDeg(-120);
+        funcs.driveForward(68);
     }
 }
