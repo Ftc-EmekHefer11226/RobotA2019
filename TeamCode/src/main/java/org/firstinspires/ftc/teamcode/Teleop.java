@@ -6,6 +6,9 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
+import java.lang.Thread;
+import java.lang.InterruptedException;
+
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop", group = "Iterative Opmode")
 public class Teleop extends OpMode {
     private Funcs funcs = new Funcs();
@@ -51,18 +54,20 @@ public class Teleop extends OpMode {
 
     private boolean sensitiveVal = false;
 
-    public boolean sensitive() {
-        if (gamepad1.x && !sensitiveVal) {
-            return true;
+    private boolean sensitive() {
+        if (gamepad1.x) {
+            sensitiveVal = !sensitiveVal;
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+            }
         }
-        return false;
-
+        return sensitiveVal;
     }
 
-
     public void drive() {
-
         if (!sensitive()) {
+            telemetry.addData("unsensitive: ", sensitive());
             if (gamepad1.right_stick_y > 0.2 || gamepad1.right_stick_y < -0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2) {
                 funcs.rDrive.setPower(-gamepad1.right_stick_y);
                 funcs.lDrive.setPower(-gamepad1.left_stick_y);
@@ -73,10 +78,12 @@ public class Teleop extends OpMode {
                 funcs.rDrive.setPower(0);
                 funcs.lDrive.setPower(0);
             }
+
         } else {
+            telemetry.addData("sensitive: ", sensitive());
             if (gamepad1.right_stick_y > 0.2 || gamepad1.right_stick_y < -0.2 || gamepad1.left_stick_y > 0.2 || gamepad1.left_stick_y < -0.2) {
-                funcs.rDrive.setPower(-gamepad1.right_stick_y * 0.2);
-                funcs.lDrive.setPower(-gamepad1.left_stick_y * 0.2);
+                funcs.rDrive.setPower(-gamepad1.right_stick_y * 0.4);
+                funcs.lDrive.setPower(-gamepad1.left_stick_y * 0.4);
                 telemetry.addData("LeftPower: ", funcs.lDrive.motor1.getPower());
                 telemetry.addData("RightPower: ", funcs.rDrive.motor1.getPower());
                 telemetry.update();
@@ -88,48 +95,42 @@ public class Teleop extends OpMode {
     }
 
     public void collect() {
-       if (gamepad2.left_trigger > 0.2) {
+        if (gamepad2.left_trigger > 0.2) {
             funcs.collect.setPower(gamepad2.left_trigger);
         } else if (gamepad2.right_trigger > 0.2) {
-           funcs.collect.setPower(-gamepad2.right_trigger);
+            funcs.collect.setPower(-gamepad2.right_trigger);
         } else {
             funcs.collect.setPower(0);
         }
-  }
+    }
 
     public void colExtend() {
         if (gamepad2.y) {
             if (funcs.colElevator.getCurrentPosition() < 1000) {
                 funcs.colElevator.setPower(0.7);
-            }
-            else if (funcs.colElevator.getCurrentPosition() > 1000) {
+            } else if (funcs.colElevator.getCurrentPosition() > 1000) {
                 funcs.colElevator.setPower(0);
                 funcs.foldCollect.setPower(0.7);
             }
-        }
-        else if (gamepad2.a) {
+        } else if (gamepad2.a) {
             if (funcs.foldCollect.getCurrentPosition() > 1) {
                 funcs.foldCollect.setPower(-0.7);
-            }
-            else if (funcs.foldCollect.getCurrentPosition() < 1) {
+            } else if (funcs.foldCollect.getCurrentPosition() < 1) {
                 funcs.foldCollect.setPower(0);
                 funcs.colElevator.setPower(-0.7);
             }
-        }
-        else {
+        } else {
             funcs.colElevator.setPower(0);
             funcs.foldCollect.setPower(0);
         }
     }
 
     public void colElevator() {
-        if (gamepad2.y){
+        if (gamepad2.y) {
             funcs.colElevator.setPower(0.7);
-        }
-        else if (gamepad2.a){
+        } else if (gamepad2.a) {
             funcs.colElevator.setPower(-0.7);
-        }
-        else{
+        } else {
             funcs.colElevator.setPower(0);
         }
     }
@@ -137,7 +138,7 @@ public class Teleop extends OpMode {
     public void colFold() {
         if (gamepad2.right_bumper) {
             funcs.foldCollect.setPower(1);
-       } else if (gamepad2.left_bumper) {
+        } else if (gamepad2.left_bumper) {
             funcs.foldCollect.setPower(-1);
         } else {
             funcs.foldCollect.setPower(0);
@@ -149,8 +150,8 @@ public class Teleop extends OpMode {
             funcs.rArm.setPosition(0);
             funcs.lArm.setPosition(0);
             telemetry.addData("servo", "up");
-        }
-        if (gamepad1.dpad_down) {
+
+        } else if (gamepad1.dpad_down) {
             funcs.rArm.setPosition(100);
             funcs.lArm.setPosition(100);
             telemetry.addData("servo", "down");
@@ -161,6 +162,7 @@ public class Teleop extends OpMode {
         if (gamepad1.left_bumper) {
             funcs.climb.setPosition(0);
         } else if (gamepad1.right_bumper) {
+
             funcs.climb.setPosition(90);
         }
 
@@ -178,14 +180,13 @@ public class Teleop extends OpMode {
         telemetry.update();
 
     }
-    public void collectDown(){
-        if (funcs.colElevator.getCurrentPosition() > 1000 && funcs.colElevator.getCurrentPosition() < 1100){
+
+    public void collectDown() {
+        if (funcs.colElevator.getCurrentPosition() > 1000 && funcs.colElevator.getCurrentPosition() < 1100) {
             funcs.foldCollect.setPower(1);
-        }
-        else if(funcs.colElevator.getCurrentPosition() < 1000 && funcs.colElevator.getCurrentPosition() > 900){
+        } else if (funcs.colElevator.getCurrentPosition() < 1000 && funcs.colElevator.getCurrentPosition() > 900) {
             funcs.foldCollect.setPower(-1);
-        }
-        else{
+        } else {
             funcs.foldCollect.setPower(0);
         }
     }
