@@ -1,11 +1,14 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.Servo;
+
 
 
 public class Funcs {
@@ -22,6 +25,7 @@ public class Funcs {
     public Servo climb = null;
     public Servo rArm = null;
     public Servo lArm = null;
+    public CRServo test = null;
     private HardwareMap HM = null;
     //DC Motors
     private DcMotor rDrive1 = null;
@@ -49,6 +53,7 @@ public class Funcs {
         climb = HM.get(Servo.class, "climb");
         rArm = HM.get(Servo.class, "rArm");
         lArm = HM.get(Servo.class, "lArm");
+        test = HM.get(CRServo.class, "test");
 
         // Sensors Init
         imu = HM.get(BNO055IMU.class, "imu");
@@ -68,6 +73,7 @@ public class Funcs {
         climb.setDirection(Servo.Direction.FORWARD);
         rArm.setDirection(Servo.Direction.REVERSE);
         lArm.setDirection(Servo.Direction.FORWARD);
+        test.setDirection(CRServo.Direction.FORWARD);
 
         // Set Modes
         rDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -182,11 +188,7 @@ public class Funcs {
         elevator.setPower(0);
     }
 
-    public void collectDown() {
-        if (foldCollect.getCurrentPosition() < 10) {
-            // foldCollect.setTargetPosition();
-        }
-    }
+
 
     public boolean colorSensor() {
         int counter = 0;
@@ -199,6 +201,15 @@ public class Funcs {
             return true;
         } else {
             return false;
+        }
+    }
+    public void collectDown() {
+        if (colElevator.getCurrentPosition() > 1000 && colElevator.getCurrentPosition() < 1100) {
+            foldCollect.setPower(1);
+        } else if (colElevator.getCurrentPosition() < 1000 && colElevator.getCurrentPosition() > 900) {
+            foldCollect.setPower(-1);
+        } else {
+            foldCollect.setPower(0);
         }
     }
 

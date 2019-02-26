@@ -46,6 +46,8 @@ public class Teleop extends OpMode {
         climb();
         // Elevator
         elevator();
+        //test
+        vex();
     }
 
     @Override
@@ -95,10 +97,10 @@ public class Teleop extends OpMode {
     }
 
     public void collect() {
-        if (gamepad2.left_trigger > 0.2) {
-            funcs.collect.setPower(gamepad2.left_trigger);
-        } else if (gamepad2.right_trigger > 0.2) {
-            funcs.collect.setPower(-gamepad2.right_trigger);
+        if (gamepad2.right_trigger > 0.2) {
+            funcs.collect.setPower(gamepad2.right_trigger);
+        } else if (gamepad2.left_trigger > 0.2) {
+            funcs.collect.setPower(-gamepad2.left_trigger);
         } else {
             funcs.collect.setPower(0);
         }
@@ -127,9 +129,9 @@ public class Teleop extends OpMode {
 
     public void colElevator() {
         if (gamepad2.y) {
-            funcs.colElevator.setPower(0.7);
-        } else if (gamepad2.a) {
             funcs.colElevator.setPower(-0.7);
+        } else if (gamepad2.a) {
+            funcs.colElevator.setPower(0.7);
         } else {
             funcs.colElevator.setPower(0);
         }
@@ -181,13 +183,16 @@ public class Teleop extends OpMode {
 
     }
 
-    public void collectDown() {
-        if (funcs.colElevator.getCurrentPosition() > 1000 && funcs.colElevator.getCurrentPosition() < 1100) {
-            funcs.foldCollect.setPower(1);
-        } else if (funcs.colElevator.getCurrentPosition() < 1000 && funcs.colElevator.getCurrentPosition() > 900) {
-            funcs.foldCollect.setPower(-1);
-        } else {
-            funcs.foldCollect.setPower(0);
+
+    public void vex(){
+        if (gamepad2.x){
+            funcs.test.setPower(0.5);
+        }
+        else if (gamepad2.b){
+            funcs.test.setPower(-0.5);
+        }
+        else{
+            funcs.test.setPower(0);
         }
     }
 }
