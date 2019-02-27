@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 enum FindCubeState {
@@ -8,7 +9,7 @@ enum FindCubeState {
     right,
     left
 }
-
+@Disabled
 @Autonomous(name = "Auto3", group = "Iterative Opmode")
 public class Auto3 extends OpMode {
     private Funcs funcs = new Funcs();

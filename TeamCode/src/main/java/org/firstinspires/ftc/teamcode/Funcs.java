@@ -4,11 +4,8 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.Servo;
-
 
 
 public class Funcs {
@@ -23,8 +20,8 @@ public class Funcs {
     // Servos
     public DcMotor elevator = null;
     public Servo climb = null;
-    public CRServo rArm = null;
-    public CRServo lArm = null;
+    public Servo rArm = null;
+    public Servo lArm = null;
 
     private HardwareMap HM = null;
     //DC Motors
@@ -51,8 +48,8 @@ public class Funcs {
 
         //  Servos Init
         climb = HM.get(Servo.class, "climb");
-        rArm = HM.get(CRServo.class, "rArm");
-        lArm = HM.get(CRServo.class, "lArm");
+        rArm = HM.get(Servo.class, "rArm");
+        lArm = HM.get(Servo.class, "lArm");
 
         // Sensors Init
         imu = HM.get(BNO055IMU.class, "imu");
@@ -70,8 +67,8 @@ public class Funcs {
 
         // Servos Set Directions
         climb.setDirection(Servo.Direction.FORWARD);
-        rArm.setDirection(CRServo.Direction.REVERSE);
-        lArm.setDirection(CRServo.Direction.FORWARD);
+        rArm.setDirection(Servo.Direction.REVERSE);
+        lArm.setDirection(Servo.Direction.FORWARD);
 
         // Set Modes
         rDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -79,14 +76,12 @@ public class Funcs {
         lDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         lDrive2.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-         collect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-         foldCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        collect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        foldCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         colElevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Set Positions
-        rArm.setPower(0);
-        lArm.setPower(0);
         climb.setPosition(0);
 
         // Set Brake
@@ -187,7 +182,6 @@ public class Funcs {
     }
 
 
-
     public boolean colorSensor() {
         int counter = 0;
         for (int i = 0; i < 100; i++) {
@@ -201,14 +195,15 @@ public class Funcs {
             return false;
         }
     }
+
     public void collectDown() {
-        if (colElevator.getCurrentPosition() > 1000 && colElevator.getCurrentPosition() < 1100) {
-            foldCollect.setPower(1);
-        } else if (colElevator.getCurrentPosition() < 1000 && colElevator.getCurrentPosition() > 900) {
-            foldCollect.setPower(-1);
-        } else {
-            foldCollect.setPower(0);
+        foldCollect.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        foldCollect.setTargetPosition(630);
+        foldCollect.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        foldCollect.setPower(1);
+        while (foldCollect.isBusy()) {
         }
+        foldCollect.setPower(0);
     }
 
 }

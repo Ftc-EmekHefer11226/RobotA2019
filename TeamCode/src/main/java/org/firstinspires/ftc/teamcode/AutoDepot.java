@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@Autonomous(name="Auto2", group="Linear Opmode")
-public class Auto2 extends LinearOpMode {
+@Autonomous(name="AutoDepot", group="Linear Opmode")
+public class AutoDepot extends LinearOpMode {
 
     private Funcs funcs = new Funcs();
 
@@ -19,8 +19,10 @@ public class Auto2 extends LinearOpMode {
         funcs.Init(hardwareMap);
 
         waitForStart();
+        funcs.elevatorUp();
+        funcs.climb.setPosition(90);
         funcs.driveForward(50);
-        // Drops the Team Marker
+        funcs.collectDown();
         funcs.driveForward(5);
         funcs.turnDeg(-120);
         funcs.driveForward(68);

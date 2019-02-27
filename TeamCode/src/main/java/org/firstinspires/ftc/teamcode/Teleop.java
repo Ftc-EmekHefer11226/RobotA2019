@@ -1,13 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.util.ElapsedTime;
-import com.qualcomm.robotcore.util.Range;
-
-import java.lang.Thread;
-import java.lang.InterruptedException;
 
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop", group = "Iterative Opmode")
 public class Teleop extends OpMode {
@@ -71,7 +64,6 @@ public class Teleop extends OpMode {
                 funcs.lDrive.setPower(-gamepad1.left_stick_y);
                 telemetry.addData("LeftPower: ", funcs.lDrive.motor1.getPower());
                 telemetry.addData("RightPower: ", funcs.rDrive.motor1.getPower());
-                telemetry.update();
             } else {
                 funcs.rDrive.setPower(0);
                 funcs.lDrive.setPower(0);
@@ -84,12 +76,12 @@ public class Teleop extends OpMode {
                 funcs.lDrive.setPower(-gamepad1.left_stick_y * 0.4);
                 telemetry.addData("LeftPower: ", funcs.lDrive.motor1.getPower());
                 telemetry.addData("RightPower: ", funcs.rDrive.motor1.getPower());
-                telemetry.update();
             } else {
                 funcs.rDrive.setPower(0);
                 funcs.lDrive.setPower(0);
             }
         }
+        telemetry.update();
     }
 
     public void collect() {
@@ -145,15 +137,20 @@ public class Teleop extends OpMode {
 
     public void arm() {
         if (gamepad1.dpad_up) {
-            funcs.rArm.setPower(0.7);
-            funcs.lArm.setPower(-0.7);
+            funcs.rArm.setPosition(0.8);
+            funcs.lArm.setPosition(0.8);
             telemetry.addData("servo", "up");
 
         } else if (gamepad1.dpad_down) {
-            funcs.rArm.setPower(-0.7);
-            funcs.lArm.setPower(0.7);
+            funcs.rArm.setPosition(0.2);
+            funcs.lArm.setPosition(0.2);
             telemetry.addData("servo", "down");
+        } else {
+            funcs.rArm.setPosition(0.5);
+            funcs.lArm.setPosition(0.5);
+            telemetry.addData("servo", "stop");
         }
+        telemetry.update();
     }
 
     public void climb() {
@@ -174,9 +171,6 @@ public class Teleop extends OpMode {
         } else {
             funcs.elevator.setPower(0);
         }
-        telemetry.addData("elevator", funcs.elevator.getCurrentPosition());
-        telemetry.update();
-
     }
 
 }
