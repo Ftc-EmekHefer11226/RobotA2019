@@ -12,8 +12,6 @@ import java.lang.InterruptedException;
 @com.qualcomm.robotcore.eventloop.opmode.TeleOp(name = "Teleop", group = "Iterative Opmode")
 public class Teleop extends OpMode {
     private Funcs funcs = new Funcs();
-    private boolean arm_toggle = false;
-    private boolean climb_toggle = false;
 
     @Override
     public void init() {
@@ -46,8 +44,6 @@ public class Teleop extends OpMode {
         climb();
         // Elevator
         elevator();
-        //test
-        vex();
     }
 
     @Override
@@ -149,13 +145,13 @@ public class Teleop extends OpMode {
 
     public void arm() {
         if (gamepad1.dpad_up) {
-            funcs.rArm.setPosition(0);
-            funcs.lArm.setPosition(0);
+            funcs.rArm.setPower(0.7);
+            funcs.lArm.setPower(-0.7);
             telemetry.addData("servo", "up");
 
         } else if (gamepad1.dpad_down) {
-            funcs.rArm.setPosition(100);
-            funcs.lArm.setPosition(100);
+            funcs.rArm.setPower(-0.7);
+            funcs.lArm.setPower(0.7);
             telemetry.addData("servo", "down");
         }
     }
@@ -172,9 +168,9 @@ public class Teleop extends OpMode {
 
     public void elevator() {
         if (gamepad2.dpad_up) {
-            funcs.elevator.setPower(0.9);
+            funcs.elevator.setPower(-1);
         } else if (gamepad2.dpad_down) {
-            funcs.elevator.setPower(-0.9);
+            funcs.elevator.setPower(1);
         } else {
             funcs.elevator.setPower(0);
         }
@@ -183,16 +179,4 @@ public class Teleop extends OpMode {
 
     }
 
-
-    public void vex(){
-        if (gamepad2.x){
-            funcs.test.setPower(0.5);
-        }
-        else if (gamepad2.b){
-            funcs.test.setPower(-0.5);
-        }
-        else{
-            funcs.test.setPower(0);
-        }
-    }
 }

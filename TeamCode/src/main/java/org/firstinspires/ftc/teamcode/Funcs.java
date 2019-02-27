@@ -23,9 +23,9 @@ public class Funcs {
     // Servos
     public DcMotor elevator = null;
     public Servo climb = null;
-    public Servo rArm = null;
-    public Servo lArm = null;
-    public CRServo test = null;
+    public CRServo rArm = null;
+    public CRServo lArm = null;
+
     private HardwareMap HM = null;
     //DC Motors
     private DcMotor rDrive1 = null;
@@ -51,9 +51,8 @@ public class Funcs {
 
         //  Servos Init
         climb = HM.get(Servo.class, "climb");
-        rArm = HM.get(Servo.class, "rArm");
-        lArm = HM.get(Servo.class, "lArm");
-        test = HM.get(CRServo.class, "test");
+        rArm = HM.get(CRServo.class, "rArm");
+        lArm = HM.get(CRServo.class, "lArm");
 
         // Sensors Init
         imu = HM.get(BNO055IMU.class, "imu");
@@ -71,9 +70,8 @@ public class Funcs {
 
         // Servos Set Directions
         climb.setDirection(Servo.Direction.FORWARD);
-        rArm.setDirection(Servo.Direction.REVERSE);
-        lArm.setDirection(Servo.Direction.FORWARD);
-        test.setDirection(CRServo.Direction.FORWARD);
+        rArm.setDirection(CRServo.Direction.REVERSE);
+        lArm.setDirection(CRServo.Direction.FORWARD);
 
         // Set Modes
         rDrive1.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -87,8 +85,8 @@ public class Funcs {
         elevator.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         // Set Positions
-        rArm.setPosition(180);
-        lArm.setPosition(180);
+        rArm.setPower(0);
+        lArm.setPower(0);
         climb.setPosition(0);
 
         // Set Brake
