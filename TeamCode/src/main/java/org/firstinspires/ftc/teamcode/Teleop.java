@@ -94,26 +94,6 @@ public class Teleop extends OpMode {
         }
     }
 
-    public void colExtend() {
-        if (gamepad2.y) {
-            if (funcs.colElevator.getCurrentPosition() < 1000) {
-                funcs.colElevator.setPower(0.7);
-            } else if (funcs.colElevator.getCurrentPosition() > 1000) {
-                funcs.colElevator.setPower(0);
-                funcs.foldCollect.setPower(0.7);
-            }
-        } else if (gamepad2.a) {
-            if (funcs.foldCollect.getCurrentPosition() > 1) {
-                funcs.foldCollect.setPower(-0.7);
-            } else if (funcs.foldCollect.getCurrentPosition() < 1) {
-                funcs.foldCollect.setPower(0);
-                funcs.colElevator.setPower(-0.7);
-            }
-        } else {
-            funcs.colElevator.setPower(0);
-            funcs.foldCollect.setPower(0);
-        }
-    }
 
     public void colElevator() {
         if (gamepad2.y) {

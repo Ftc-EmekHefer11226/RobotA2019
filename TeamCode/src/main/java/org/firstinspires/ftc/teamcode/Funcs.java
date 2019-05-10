@@ -31,7 +31,7 @@ public class Funcs {
     private DcMotor lDrive2 = null;
     // Sensors
     private BNO055IMU imu = null;
-    public ColorSensor colorSensor = null;
+   public ColorSensor colorSensor = null;
 
     public void Init(HardwareMap HM) {
         this.HM = HM;
